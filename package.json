@@ -1,0 +1,9 @@
+{
+  "name": "donte",
+  "version": "1.0.0",
+  "description": "redditapi",
+  "main": "index.js",
+  "author": "donte nall",
+  "license": "me",
+  "private": false
+}
