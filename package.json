@@ -6,6 +6,11 @@
   "author": "donte nall",
   "license": "me",
   "private": false,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open --hot",
+    "devbuild": "webpack --mode development"
+  },
   "dependencies": {
     "@material-ui/core": "^4.9.10",
     "moment": "^2.24.0",
