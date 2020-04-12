@@ -14,7 +14,7 @@
     "dev": "webpack-dev-server --open --hot",
     "devbuild": "webpack --mode development",
     "server": "nodemon server.js",
-    "heroku-postbuild": "webpack"
+    "heroku-postbuild": "webpack --mode production"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.10",

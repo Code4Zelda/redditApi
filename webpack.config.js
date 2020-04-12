@@ -6,7 +6,7 @@ module.exports = {
   entry: "./src/index.tsx",
   target: "web",
   devtool: "source-map",
-  mode: "development",
+  mode: "production",
   // watch: true,
   module: {
     rules: [
