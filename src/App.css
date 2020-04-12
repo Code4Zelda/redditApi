@@ -8,3 +8,24 @@ body,
   margin: 0;
   background-color: rgb(221, 192, 255);
 }
+
+/* Image */
+img {
+  border: none;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Search */
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}

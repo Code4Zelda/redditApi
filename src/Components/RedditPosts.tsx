@@ -1,5 +1,7 @@
 import * as React from "react";
 import useRedditApi from "../Hook/useRedditApi";
+import Search from "./Search";
+import Modal from "./ModalDisplay";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -7,7 +9,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 interface IPost {
@@ -47,8 +48,17 @@ const useStyles = makeStyles((theme) => ({
 const RedditPosts = ({}) => {
   const { data, isLoading, error } = useRedditApi();
   const [search, setSearch] = React.useState<string>("");
-
+  const [openModal, setModal] = React.useState<boolean>(false);
+  const [rest, setRest] = React.useState<undefined | {}>({});
   const classes = useStyles();
+
+  const handleModal = (props: {}) => {
+    setModal(true);
+    setRest(props);
+  };
+  const handleModalClose = () => {
+    setModal(false);
+  };
 
   const renderImage = () => (
     <>
@@ -65,6 +75,7 @@ const RedditPosts = ({}) => {
                     className={classes.media}
                     image={props.thumbnail}
                     title={props.title}
+                    onClick={() => handleModal(props)}
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="h2">
@@ -79,7 +90,14 @@ const RedditPosts = ({}) => {
 
   return (
     <div>
+      <Search
+        search={search}
+        onChange={(e: any) => setSearch(e.target.value)}
+      />
       <div className="container">{renderImage()}</div>
+      {openModal && (
+        <Modal isOpen={openModal} props={rest} onClose={handleModalClose} />
+      )}
     </div>
   );
 };
