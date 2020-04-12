@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./App.css";
-import RedditPost from "./Components/RedditPosts";
+import RedditPost from "./components/RedditPosts";
 
 const App = () => {
   return (

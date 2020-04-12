@@ -1,5 +1,5 @@
 import * as React from "react";
-import useRedditApi from "../Hook/useRedditApi";
+import useRedditApi from "../hook/useRedditApi";
 import Search from "./Search";
 import Modal from "./ModalDisplay";
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,6 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 interface IPost {
@@ -21,13 +22,13 @@ interface IPost {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexDirection: "column",
-    justifyContent: "space-between",
-    padding: 25,
-    width: 300,
+    justifyContent: "space-around",
+
+    margin: 30,
   },
+
   media: {
-    height: 140,
+    height: 150,
     display: "block",
     textAlign: "initial",
   },
@@ -42,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(2),
       alignItems: "center",
     },
+  },
+  content: {
+    height: 20,
   },
 }));
 
@@ -62,7 +66,7 @@ const RedditPosts = ({}) => {
 
   const renderImage = () => (
     <>
-      <Card className={classes.root}>
+      <Grid className={classes.root} container spacing={3}>
         {error
           ? error
           : data
@@ -70,23 +74,36 @@ const RedditPosts = ({}) => {
                 title.toLowerCase().includes(search.toLowerCase())
               )
               .map((props: IPost) => (
-                <CardActionArea key={props.id}>
-                  <CardMedia
-                    className={classes.media}
-                    image={props.thumbnail}
-                    title={props.title}
-                    onClick={() => handleModal(props)}
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="h2">
-                      {props.title}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                <Grid item xs={4}>
+                  {/* <Card className={classes.card}> */}
+                  <Card>
+                    <CardActionArea key={props.id}>
+                      <CardMedia
+                        className={classes.media}
+                        image={props.thumbnail}
+                        title={props.title}
+                        onClick={() => handleModal(props)}
+                      />
+                      <CardContent className={classes.content}>
+                        <Typography gutterBottom variant="h6" component="h2">
+                          {props.title}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
               ))}
-      </Card>
+      </Grid>
     </>
   );
+
+  const loadIcon = () => {
+    return (
+      <div className={classes.backdrop}>
+        <CircularProgress />
+      </div>
+    );
+  };
 
   return (
     <div>
@@ -94,7 +111,7 @@ const RedditPosts = ({}) => {
         search={search}
         onChange={(e: any) => setSearch(e.target.value)}
       />
-      <div className="container">{renderImage()}</div>
+      <div className="container">{isLoading ? loadIcon() : renderImage()}</div>
       {openModal && (
         <Modal isOpen={openModal} props={rest} onClose={handleModalClose} />
       )}
