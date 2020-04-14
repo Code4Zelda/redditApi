@@ -15,8 +15,6 @@ const useStyles = makeStyles((theme) => ({
 const Search = ({ search, onChange }: any) => {
   const classes = useStyles();
 
-  React.useEffect(() => {});
-
   return (
     <>
       <div className="search-container">
