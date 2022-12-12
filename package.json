@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.9.10",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
